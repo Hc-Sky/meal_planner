@@ -7,19 +7,31 @@ import '../features/home/presentation/screens/home_screen.dart';
 import '../features/menu/presentation/screens/menu_screen.dart';
 import '../features/pantry/presentation/screens/pantry_screen.dart';
 import '../features/shopping/presentation/screens/shopping_list_screen.dart';
+import '../features/auth/presentation/providers/auth_provider.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
+  final authState = ref.watch(authStateProvider);
+
   return GoRouter(
     initialLocation: '/',
     redirect: (context, state) {
-      // TODO: Implémenter la logique de redirection basée sur l'état d'authentification
+      final isLoggedIn = authState.value != null;
+      final isAuthRoute = state.matchedLocation == '/auth';
+
+      if (!isLoggedIn && !isAuthRoute) {
+        return '/auth';
+      }
+
+      if (isLoggedIn && isAuthRoute) {
+        return '/';
+      }
+
       return null;
     },
     routes: [
       // Route d'authentification
       GoRoute(
-        path: '/login',
-        name: 'login',
+        path: '/auth',
         builder: (context, state) => const AuthScreen(),
       ),
       // Route de configuration du profil
@@ -44,7 +56,13 @@ final routerProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: '/menu',
             name: 'menu',
-            builder: (context, state) => const MenuScreen(),
+            builder: (context, state) {
+              final userId = authState.value?.uid;
+              if (userId == null) {
+                return const AuthScreen();
+              }
+              return MenuScreen(userId: userId);
+            },
           ),
           // Route du garde-manger
           GoRoute(

@@ -1,1 +1,32 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"meal-planner-mvp","appId":"1:32483548307:android:dd10ce895b55f1d534c166","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"meal-planner-mvp","configurations":{"android":"1:32483548307:android:dd10ce895b55f1d534c166","ios":"1:32483548307:ios:6110b18d2c46781534c166","macos":"1:32483548307:ios:6110b18d2c46781534c166","web":"1:32483548307:web:afc93b0c9970fdd834c166","windows":"1:32483548307:web:a9a85fa69e03175434c166"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "meal-planner-mvp",
+          "appId": "1:32483548307:android:dd10ce895b55f1d534c166",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "meal-planner-mvp",
+          "configurations": {
+            "android": "1:32483548307:android:dd10ce895b55f1d534c166",
+            "ios": "1:32483548307:ios:6110b18d2c46781534c166",
+            "macos": "1:32483548307:ios:6110b18d2c46781534c166",
+            "web": "1:32483548307:web:afc93b0c9970fdd834c166",
+            "windows": "1:32483548307:web:a9a85fa69e03175434c166"
+          }
+        }
+      }
+    }
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "functions": {
+    "source": "functions"
+  }
+}
