@@ -1,0 +1,37 @@
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+_ShoppingItem _$ShoppingItemFromJson(Map<String, dynamic> json) =>
+    _ShoppingItem(
+      id: json['id'] as String,
+      userId: json['userId'] as String,
+      name: json['name'] as String,
+      quantity: (json['quantity'] as num).toDouble(),
+      unit: json['unit'] as String,
+      category: json['category'] as String,
+      isChecked: json['isChecked'] as bool? ?? false,
+      recipeId: json['recipeId'] as String?,
+      createdAt:
+          json['createdAt'] == null
+              ? null
+              : DateTime.parse(json['createdAt'] as String),
+      updatedAt:
+          json['updatedAt'] == null
+              ? null
+              : DateTime.parse(json['updatedAt'] as String),
+    );
+
+Map<String, dynamic> _$ShoppingItemToJson(_ShoppingItem instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'userId': instance.userId,
+      'name': instance.name,
+      'quantity': instance.quantity,
+      'unit': instance.unit,
+      'category': instance.category,
+      'isChecked': instance.isChecked,
+      'recipeId': instance.recipeId,
+      'createdAt': instance.createdAt?.toIso8601String(),
+      'updatedAt': instance.updatedAt?.toIso8601String(),
+    };

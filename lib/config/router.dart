@@ -1,0 +1,130 @@
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../features/auth/presentation/screens/auth_screen.dart';
+import '../features/profile/presentation/screens/profile_form_screen.dart';
+import '../features/home/presentation/screens/home_screen.dart';
+import '../features/menu/presentation/screens/menu_screen.dart';
+import '../features/pantry/presentation/screens/pantry_screen.dart';
+import '../features/shopping/presentation/screens/shopping_list_screen.dart';
+
+final routerProvider = Provider<GoRouter>((ref) {
+  return GoRouter(
+    initialLocation: '/',
+    redirect: (context, state) {
+      // TODO: Implémenter la logique de redirection basée sur l'état d'authentification
+      return null;
+    },
+    routes: [
+      // Route d'authentification
+      GoRoute(
+        path: '/login',
+        name: 'login',
+        builder: (context, state) => const AuthScreen(),
+      ),
+      // Route de configuration du profil
+      GoRoute(
+        path: '/setup-profile',
+        name: 'setup-profile',
+        builder: (context, state) => const ProfileFormScreen(),
+      ),
+      // Shell route pour le layout principal
+      ShellRoute(
+        builder: (context, state, child) {
+          return ScaffoldWithNavBar(child: child);
+        },
+        routes: [
+          // Route de la page d'accueil
+          GoRoute(
+            path: '/',
+            name: 'home',
+            builder: (context, state) => const HomeScreen(),
+          ),
+          // Route du menu
+          GoRoute(
+            path: '/menu',
+            name: 'menu',
+            builder: (context, state) => const MenuScreen(),
+          ),
+          // Route du garde-manger
+          GoRoute(
+            path: '/pantry',
+            name: 'pantry',
+            builder: (context, state) => const PantryScreen(),
+          ),
+          // Route de la liste de courses
+          GoRoute(
+            path: '/shopping-list',
+            name: 'shopping-list',
+            builder: (context, state) => const ShoppingListScreen(),
+          ),
+        ],
+      ),
+    ],
+  );
+});
+
+class ScaffoldWithNavBar extends StatelessWidget {
+  const ScaffoldWithNavBar({
+    super.key,
+    required this.child,
+  });
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: child,
+      bottomNavigationBar: NavigationBar(
+        onDestinationSelected: (index) {
+          switch (index) {
+            case 0:
+              context.goNamed('home');
+              break;
+            case 1:
+              context.goNamed('menu');
+              break;
+            case 2:
+              context.goNamed('pantry');
+              break;
+            case 3:
+              context.goNamed('shopping-list');
+              break;
+          }
+        },
+        selectedIndex: _calculateSelectedIndex(context),
+        destinations: const [
+          NavigationDestination(
+            icon: Icon(Icons.home_outlined),
+            selectedIcon: Icon(Icons.home),
+            label: 'Accueil',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.restaurant_menu_outlined),
+            selectedIcon: Icon(Icons.restaurant_menu),
+            label: 'Menu',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.kitchen_outlined),
+            selectedIcon: Icon(Icons.kitchen),
+            label: 'Garde-manger',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.shopping_cart_outlined),
+            selectedIcon: Icon(Icons.shopping_cart),
+            label: 'Courses',
+          ),
+        ],
+      ),
+    );
+  }
+
+  int _calculateSelectedIndex(BuildContext context) {
+    final String location = GoRouterState.of(context).uri.path;
+    if (location.startsWith('/menu')) return 1;
+    if (location.startsWith('/pantry')) return 2;
+    if (location.startsWith('/shopping-list')) return 3;
+    return 0;
+  }
+} 

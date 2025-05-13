@@ -1,0 +1,57 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'recipe.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+_Recipe _$RecipeFromJson(Map<String, dynamic> json) => _Recipe(
+  id: json['id'] as String,
+  name: json['name'] as String,
+  description: json['description'] as String,
+  ingredients:
+      (json['ingredients'] as List<dynamic>).map((e) => e as String).toList(),
+  instructions:
+      (json['instructions'] as List<dynamic>).map((e) => e as String).toList(),
+  preparationTime: (json['preparationTime'] as num).toInt(),
+  cookingTime: (json['cookingTime'] as num).toInt(),
+  servings: (json['servings'] as num).toInt(),
+  difficulty: json['difficulty'] as String,
+  tags:
+      (json['tags'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+      const [],
+  imageUrl: json['imageUrl'] as String?,
+  rating: (json['rating'] as num?)?.toDouble() ?? 0,
+  reviewCount: (json['reviewCount'] as num?)?.toInt() ?? 0,
+  userId: json['userId'] as String?,
+  isPublic: json['isPublic'] as bool? ?? false,
+  createdAt:
+      json['createdAt'] == null
+          ? null
+          : DateTime.parse(json['createdAt'] as String),
+  updatedAt:
+      json['updatedAt'] == null
+          ? null
+          : DateTime.parse(json['updatedAt'] as String),
+);
+
+Map<String, dynamic> _$RecipeToJson(_Recipe instance) => <String, dynamic>{
+  'id': instance.id,
+  'name': instance.name,
+  'description': instance.description,
+  'ingredients': instance.ingredients,
+  'instructions': instance.instructions,
+  'preparationTime': instance.preparationTime,
+  'cookingTime': instance.cookingTime,
+  'servings': instance.servings,
+  'difficulty': instance.difficulty,
+  'tags': instance.tags,
+  'imageUrl': instance.imageUrl,
+  'rating': instance.rating,
+  'reviewCount': instance.reviewCount,
+  'userId': instance.userId,
+  'isPublic': instance.isPublic,
+  'createdAt': instance.createdAt?.toIso8601String(),
+  'updatedAt': instance.updatedAt?.toIso8601String(),
+};

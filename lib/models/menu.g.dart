@@ -1,0 +1,63 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'menu.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+_Menu _$MenuFromJson(Map<String, dynamic> json) => _Menu(
+  id: json['id'] as String,
+  userId: json['userId'] as String,
+  startDate: DateTime.parse(json['startDate'] as String),
+  endDate: DateTime.parse(json['endDate'] as String),
+  days:
+      (json['days'] as List<dynamic>)
+          .map((e) => MenuDay.fromJson(e as Map<String, dynamic>))
+          .toList(),
+  isGenerated: json['isGenerated'] as bool? ?? false,
+  createdAt:
+      json['createdAt'] == null
+          ? null
+          : DateTime.parse(json['createdAt'] as String),
+  updatedAt:
+      json['updatedAt'] == null
+          ? null
+          : DateTime.parse(json['updatedAt'] as String),
+);
+
+Map<String, dynamic> _$MenuToJson(_Menu instance) => <String, dynamic>{
+  'id': instance.id,
+  'userId': instance.userId,
+  'startDate': instance.startDate.toIso8601String(),
+  'endDate': instance.endDate.toIso8601String(),
+  'days': instance.days,
+  'isGenerated': instance.isGenerated,
+  'createdAt': instance.createdAt?.toIso8601String(),
+  'updatedAt': instance.updatedAt?.toIso8601String(),
+};
+
+_MenuDay _$MenuDayFromJson(Map<String, dynamic> json) => _MenuDay(
+  date: DateTime.parse(json['date'] as String),
+  meals:
+      (json['meals'] as List<dynamic>)
+          .map((e) => Meal.fromJson(e as Map<String, dynamic>))
+          .toList(),
+);
+
+Map<String, dynamic> _$MenuDayToJson(_MenuDay instance) => <String, dynamic>{
+  'date': instance.date.toIso8601String(),
+  'meals': instance.meals,
+};
+
+_Meal _$MealFromJson(Map<String, dynamic> json) => _Meal(
+  type: json['type'] as String,
+  recipe: Recipe.fromJson(json['recipe'] as Map<String, dynamic>),
+  isCompleted: json['isCompleted'] as bool? ?? false,
+);
+
+Map<String, dynamic> _$MealToJson(_Meal instance) => <String, dynamic>{
+  'type': instance.type,
+  'recipe': instance.recipe,
+  'isCompleted': instance.isCompleted,
+};
