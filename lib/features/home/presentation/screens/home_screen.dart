@@ -18,7 +18,7 @@ class HomeScreen extends StatelessWidget {
             actions: [
               IconButton(
                 icon: const Icon(Icons.person_outline),
-                onPressed: () => context.pushNamed('setup-profile'),
+                onPressed: () => context.pushNamed('profile'),
               ),
             ],
           ),

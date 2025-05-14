@@ -40,6 +40,12 @@ final routerProvider = Provider<GoRouter>((ref) {
         name: 'setup-profile',
         builder: (context, state) => const ProfileFormScreen(),
       ),
+      // Route de la page de profil
+      GoRoute(
+        path: '/profile',
+        name: 'profile',
+        builder: (context, state) => const ProfileFormScreen(),
+      ),
       // Shell route pour le layout principal
       ShellRoute(
         builder: (context, state, child) {

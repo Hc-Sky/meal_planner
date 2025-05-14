@@ -3,6 +3,7 @@
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 /// Default [FirebaseOptions] for use with your Firebase apps.
 ///
@@ -40,47 +41,47 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyAeMmxL09iNptGpvBp1HF-7lZEFnEOcOwg',
-    appId: '1:32483548307:web:afc93b0c9970fdd834c166',
-    messagingSenderId: '32483548307',
-    projectId: 'meal-planner-mvp',
-    authDomain: 'meal-planner-mvp.firebaseapp.com',
-    storageBucket: 'meal-planner-mvp.firebasestorage.app',
-  );
+  static FirebaseOptions get web => FirebaseOptions(
+        apiKey: dotenv.env['FIREBASE_WEB_API_KEY']!,
+        appId: dotenv.env['FIREBASE_WEB_APP_ID']!,
+        messagingSenderId: dotenv.env['FIREBASE_WEB_MESSAGING_SENDER_ID']!,
+        projectId: dotenv.env['FIREBASE_WEB_PROJECT_ID']!,
+        authDomain: dotenv.env['FIREBASE_WEB_AUTH_DOMAIN']!,
+        storageBucket: dotenv.env['FIREBASE_WEB_STORAGE_BUCKET']!,
+      );
 
-  static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDV_VeQDjVU1i_-TN1r_WVUc2Ktp5vaQ0g',
-    appId: '1:32483548307:android:dd10ce895b55f1d534c166',
-    messagingSenderId: '32483548307',
-    projectId: 'meal-planner-mvp',
-    storageBucket: 'meal-planner-mvp.firebasestorage.app',
-  );
+  static FirebaseOptions get android => FirebaseOptions(
+        apiKey: dotenv.env['FIREBASE_ANDROID_API_KEY']!,
+        appId: dotenv.env['FIREBASE_ANDROID_APP_ID']!,
+        messagingSenderId: dotenv.env['FIREBASE_ANDROID_MESSAGING_SENDER_ID']!,
+        projectId: dotenv.env['FIREBASE_ANDROID_PROJECT_ID']!,
+        storageBucket: dotenv.env['FIREBASE_ANDROID_STORAGE_BUCKET']!,
+      );
 
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDj9AhJRYWZ6gCedDq0ojucC8_GilnC0Jc',
-    appId: '1:32483548307:ios:6110b18d2c46781534c166',
-    messagingSenderId: '32483548307',
-    projectId: 'meal-planner-mvp',
-    storageBucket: 'meal-planner-mvp.firebasestorage.app',
-    iosBundleId: 'com.example.mealPlanner',
-  );
+  static FirebaseOptions get ios => FirebaseOptions(
+        apiKey: dotenv.env['FIREBASE_IOS_API_KEY']!,
+        appId: dotenv.env['FIREBASE_IOS_APP_ID']!,
+        messagingSenderId: dotenv.env['FIREBASE_IOS_MESSAGING_SENDER_ID']!,
+        projectId: dotenv.env['FIREBASE_IOS_PROJECT_ID']!,
+        storageBucket: dotenv.env['FIREBASE_IOS_STORAGE_BUCKET']!,
+        iosBundleId: dotenv.env['FIREBASE_IOS_BUNDLE_ID']!,
+      );
 
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyDj9AhJRYWZ6gCedDq0ojucC8_GilnC0Jc',
-    appId: '1:32483548307:ios:6110b18d2c46781534c166',
-    messagingSenderId: '32483548307',
-    projectId: 'meal-planner-mvp',
-    storageBucket: 'meal-planner-mvp.firebasestorage.app',
-    iosBundleId: 'com.example.mealPlanner',
-  );
+  static FirebaseOptions get macos => FirebaseOptions(
+        apiKey: dotenv.env['FIREBASE_IOS_API_KEY']!,
+        appId: dotenv.env['FIREBASE_IOS_APP_ID']!,
+        messagingSenderId: dotenv.env['FIREBASE_IOS_MESSAGING_SENDER_ID']!,
+        projectId: dotenv.env['FIREBASE_IOS_PROJECT_ID']!,
+        storageBucket: dotenv.env['FIREBASE_IOS_STORAGE_BUCKET']!,
+        iosBundleId: dotenv.env['FIREBASE_IOS_BUNDLE_ID']!,
+      );
 
-  static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyAeMmxL09iNptGpvBp1HF-7lZEFnEOcOwg',
-    appId: '1:32483548307:web:a9a85fa69e03175434c166',
-    messagingSenderId: '32483548307',
-    projectId: 'meal-planner-mvp',
-    authDomain: 'meal-planner-mvp.firebaseapp.com',
-    storageBucket: 'meal-planner-mvp.firebasestorage.app',
-  );
+  static FirebaseOptions get windows => FirebaseOptions(
+        apiKey: dotenv.env['FIREBASE_WEB_API_KEY']!,
+        appId: dotenv.env['FIREBASE_WEB_APP_ID']!,
+        messagingSenderId: dotenv.env['FIREBASE_WEB_MESSAGING_SENDER_ID']!,
+        projectId: dotenv.env['FIREBASE_WEB_PROJECT_ID']!,
+        authDomain: dotenv.env['FIREBASE_WEB_AUTH_DOMAIN']!,
+        storageBucket: dotenv.env['FIREBASE_WEB_STORAGE_BUCKET']!,
+      );
 }

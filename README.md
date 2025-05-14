@@ -1,16 +1,39 @@
-# meal_planner
+🥗 MEAL PLANNER
+Plan My Meals est une application mobile Flutter qui permet de planifier facilement tous les repas de la semaine en fonction de votre régime alimentaire, de vos préférences, de vos allergies, de votre budget, du contenu de votre frigo, de votre équipement de cuisine et du temps disponible pour cuisiner. Elle génère automatiquement des recettes équilibrées et une liste de courses optimisée. À terme, l'application pourra se connecter aux stocks des supermarchés pour indiquer où acheter chaque produit au meilleur rapport qualité/prix.
 
-A new Flutter project.
 
-## Getting Started
+🚀 Fonctionnalités principales
+👤 Profil utilisateur personnalisé :
 
-This project is a starting point for a Flutter application.
+Objectif (prise de masse, perte de poids, maintien)
+Allergies, régimes spéciaux
+Préférences alimentaires (ingrédients à éviter ou à favoriser)
+Budget hebdomadaire
+Temps disponible pour cuisiner
+Équipement de cuisine disponible
+🧊 Gestion du frigo :
 
-A few resources to get you started if this is your first Flutter project:
+Scan de code-barres
+Ajout manuel des ingrédients
+Quantité et date de péremption (optionnelle)
+🍽️ Planification intelligente des repas :
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Recommandations personnalisées selon le profil
+Recettes équilibrées avec macros calculées
+Mode batch cooking disponible
+🛒 Liste de courses automatique :
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Générée à partir du planning de la semaine
+Optimisée selon le budget et les stocks du frigo
+Triée par catégories (rayons/supermarché)
+🏬 (À venir) Connexion aux supermarchés :
+
+Vérification de disponibilité des produits
+Suggestion du meilleur lieu d’achat
+
+📱 Technologies utilisées
+Flutter – Framework UI multiplateforme
+Dart – Langage principal
+[Firebase/Supabase] – Authentification et base de données (à confirmer)
+API Nutrition/Recettes (ex. Spoonacular, Edamam)
+Intégrations futures : API supermarchés (Carrefour, Intermarché, etc.)
