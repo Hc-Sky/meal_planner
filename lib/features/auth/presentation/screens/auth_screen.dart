@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import '../providers/auth_provider.dart';
+import 'package:go_router/go_router.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AuthScreen extends ConsumerStatefulWidget {
   const AuthScreen({super.key});
@@ -36,8 +38,19 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
 
       if (_isLogin) {
         await ref.read(authControllerProvider.notifier).signIn(email, password);
+        final user = ref.read(authStateProvider).value;
+        if (user != null) {
+          final doc = await FirebaseFirestore.instance.collection('users').doc(user.uid).get();
+          if (!doc.exists) {
+            if (mounted) context.go('/setup-profile');
+          }
+        }
       } else {
         await ref.read(authControllerProvider.notifier).signUp(email, password);
+        final user = ref.read(authStateProvider).value;
+        if (user != null) {
+          if (mounted) context.go('/setup-profile');
+        }
       }
     }
   }

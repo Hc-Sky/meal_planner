@@ -8,6 +8,7 @@ import '../features/menu/presentation/screens/menu_screen.dart';
 import '../features/pantry/presentation/screens/pantry_screen.dart';
 import '../features/shopping/presentation/screens/shopping_list_screen.dart';
 import '../features/auth/presentation/providers/auth_provider.dart';
+import '../debug/seed_database.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
   final authState = ref.watch(authStateProvider);
@@ -81,6 +82,12 @@ final routerProvider = Provider<GoRouter>((ref) {
             path: '/shopping-list',
             name: 'shopping-list',
             builder: (context, state) => const ShoppingListScreen(),
+          ),
+          // Route de debug pour le seed de la base de données
+          GoRoute(
+            path: '/debug/seed',
+            name: 'debug-seed',
+            builder: (context, state) => const SeedDatabaseScreen(),
           ),
         ],
       ),

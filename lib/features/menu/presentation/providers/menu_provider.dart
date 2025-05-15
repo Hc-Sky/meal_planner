@@ -17,7 +17,16 @@ class MenuController extends StateNotifier<AsyncValue<Map<String, dynamic>?>> {
       final menu = await _menuService.generateMenu(profile);
       state = AsyncValue.data(menu);
     } catch (error, stackTrace) {
-      state = AsyncValue.error(error, stackTrace);
+      String errorMessage = 'Une erreur est survenue';
+
+      
+      if (error.toString().contains('Aucune recette disponible')) {
+        errorMessage = 'Aucune recette n\'est disponible dans la base de données';
+      } else if (error.toString().contains('Aucune recette ne correspond')) {
+        errorMessage = 'Aucune recette ne correspond à vos critères. Veuillez ajuster vos préférences.';
+      }
+    
+      state = AsyncValue.error(error.toString(), stackTrace);
     }
   }
 } 

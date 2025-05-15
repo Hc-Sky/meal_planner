@@ -23,44 +23,7 @@ class MenuScreen extends ConsumerWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh),
-            onPressed: () async {
-              try {
-                final userDoc = await FirebaseFirestore.instance
-                    .collection('users')
-                    .doc(userId)
-                    .get();
-
-                if (!userDoc.exists) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Veuillez d\'abord configurer votre profil'),
-                    ),
-                  );
-                  return;
-                }
-
-                final userData = userDoc.data() as Map<String, dynamic>;
-                await ref.read(menuControllerProvider.notifier).generateMenu({
-                  'dietaryRestrictions': userData['dietaryRestrictions'] ?? [],
-                  'equipment': userData['equipment'] ?? [],
-                  'allergies': userData['allergies'] ?? [],
-                  'maxPreparationTime': userData['maxPreparationTime'] ?? 30,
-                });
-
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Menu régénéré avec succès'),
-                  ),
-                );
-              } catch (e) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text('Erreur: ${e.toString()}'),
-                    backgroundColor: Colors.red,
-                  ),
-                );
-              }
-            },
+            onPressed: () => _generateMenu(context, ref),
           ),
         ],
       ),
@@ -74,38 +37,7 @@ class MenuScreen extends ConsumerWidget {
                   const Text('Aucun menu généré'),
                   const SizedBox(height: 16),
                   ElevatedButton(
-                    onPressed: () async {
-                      try {
-                        final userDoc = await FirebaseFirestore.instance
-                            .collection('users')
-                            .doc(userId)
-                            .get();
-
-                        if (!userDoc.exists) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Veuillez d\'abord configurer votre profil'),
-                            ),
-                          );
-                          return;
-                        }
-
-                        final userData = userDoc.data() as Map<String, dynamic>;
-                        await ref.read(menuControllerProvider.notifier).generateMenu({
-                          'dietaryRestrictions': userData['dietaryRestrictions'] ?? [],
-                          'equipment': userData['equipment'] ?? [],
-                          'allergies': userData['allergies'] ?? [],
-                          'maxPreparationTime': userData['maxPreparationTime'] ?? 30,
-                        });
-                      } catch (e) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text('Erreur: ${e.toString()}'),
-                            backgroundColor: Colors.red,
-                          ),
-                        );
-                      }
-                    },
+                    onPressed: () => _generateMenu(context, ref),
                     child: const Text('Générer un menu'),
                   ),
                 ],
@@ -128,14 +60,14 @@ class MenuScreen extends ConsumerWidget {
                     ),
                   ),
                   RecipeCard(
-                    recipe: day['breakfast'],
+                    recipe: day['meals']['breakfast'],
                     userId: userId,
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => RecipeDetailScreen(
-                            recipe: day['breakfast'],
+                            recipe: day['meals']['breakfast'],
                             userId: userId,
                           ),
                         ),
@@ -143,14 +75,14 @@ class MenuScreen extends ConsumerWidget {
                     },
                   ),
                   RecipeCard(
-                    recipe: day['lunch'],
+                    recipe: day['meals']['lunch'],
                     userId: userId,
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => RecipeDetailScreen(
-                            recipe: day['lunch'],
+                            recipe: day['meals']['lunch'],
                             userId: userId,
                           ),
                         ),
@@ -158,14 +90,14 @@ class MenuScreen extends ConsumerWidget {
                     },
                   ),
                   RecipeCard(
-                    recipe: day['dinner'],
+                    recipe: day['meals']['dinner'],
                     userId: userId,
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => RecipeDetailScreen(
-                            recipe: day['dinner'],
+                            recipe: day['meals']['dinner'],
                             userId: userId,
                           ),
                         ),
@@ -177,11 +109,68 @@ class MenuScreen extends ConsumerWidget {
             },
           );
         },
-        loading: () => const Center(child: CircularProgressIndicator()),
+        loading: () => const Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CircularProgressIndicator(),
+              SizedBox(height: 16),
+              Text('Génération du menu en cours...'),
+            ],
+          ),
+        ),
         error: (error, stackTrace) => Center(
-          child: Text('Erreur: ${error.toString()}'),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                error.toString(),
+                textAlign: TextAlign.center,
+                style: const TextStyle(color: Colors.red),
+              ),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () => _generateMenu(context, ref),
+                child: const Text('Réessayer'),
+              ),
+            ],
+          ),
         ),
       ),
     );
+  }
+
+  Future<void> _generateMenu(BuildContext context, WidgetRef ref) async {
+    try {
+      final userDoc = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userId)
+          .get();
+
+      if (!userDoc.exists) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Veuillez d\'abord configurer votre profil'),
+          ),
+        );
+        return;
+      }
+
+      final userData = userDoc.data() as Map<String, dynamic>;
+      await ref.read(menuControllerProvider.notifier).generateMenu({
+        'userId': userId,
+        'dietaryRestrictions': userData['dietaryRestrictions'] ?? [],
+        'equipment': userData['equipment'] ?? [],
+        'allergies': userData['allergies'] ?? [],
+        'maxPreparationTime': userData['maxPreparationTime'] ?? 30,
+      });
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Erreur: ${e.toString()}'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
   }
 } 

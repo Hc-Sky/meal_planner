@@ -12,7 +12,6 @@ part of 'pantry_item.dart';
 
 // dart format off
 T _$identity<T>(T value) => value;
-
 /// @nodoc
 mixin _$PantryItem {
 
@@ -23,8 +22,6 @@ mixin _$PantryItem {
 @pragma('vm:prefer-inline')
 $PantryItemCopyWith<PantryItem> get copyWith => _$PantryItemCopyWithImpl<PantryItem>(this as PantryItem, _$identity);
 
-  /// Serializes this PantryItem to a JSON map.
-  Map<String, dynamic> toJson();
 
 
 @override
@@ -32,7 +29,7 @@ bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is PantryItem&&(identical(other.id, id) || other.id == id)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.name, name) || other.name == name)&&(identical(other.quantity, quantity) || other.quantity == quantity)&&(identical(other.unit, unit) || other.unit == unit)&&(identical(other.category, category) || other.category == category)&&(identical(other.expirationDate, expirationDate) || other.expirationDate == expirationDate)&&(identical(other.isLow, isLow) || other.isLow == isLow)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hash(runtimeType,id,userId,name,quantity,unit,category,expirationDate,isLow,createdAt,updatedAt);
 
@@ -86,11 +83,11 @@ as DateTime?,
 
 
 /// @nodoc
-@JsonSerializable()
 
-class _PantryItem implements PantryItem {
-  const _PantryItem({required this.id, required this.userId, required this.name, required this.quantity, required this.unit, required this.category, this.expirationDate, this.isLow = false, this.createdAt, this.updatedAt});
-  factory _PantryItem.fromJson(Map<String, dynamic> json) => _$PantryItemFromJson(json);
+
+class _PantryItem extends PantryItem {
+  const _PantryItem({required this.id, required this.userId, required this.name, required this.quantity, required this.unit, required this.category, this.expirationDate, this.isLow = false, this.createdAt, this.updatedAt}): super._();
+  
 
 @override final  String id;
 @override final  String userId;
@@ -109,17 +106,14 @@ class _PantryItem implements PantryItem {
 @pragma('vm:prefer-inline')
 _$PantryItemCopyWith<_PantryItem> get copyWith => __$PantryItemCopyWithImpl<_PantryItem>(this, _$identity);
 
-@override
-Map<String, dynamic> toJson() {
-  return _$PantryItemToJson(this, );
-}
+
 
 @override
 bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is _PantryItem&&(identical(other.id, id) || other.id == id)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.name, name) || other.name == name)&&(identical(other.quantity, quantity) || other.quantity == quantity)&&(identical(other.unit, unit) || other.unit == unit)&&(identical(other.category, category) || other.category == category)&&(identical(other.expirationDate, expirationDate) || other.expirationDate == expirationDate)&&(identical(other.isLow, isLow) || other.isLow == isLow)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.updatedAt, updatedAt) || other.updatedAt == updatedAt));
 }
 
-@JsonKey(includeFromJson: false, includeToJson: false)
+
 @override
 int get hashCode => Object.hash(runtimeType,id,userId,name,quantity,unit,category,expirationDate,isLow,createdAt,updatedAt);
 
